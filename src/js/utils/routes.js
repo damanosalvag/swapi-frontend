@@ -1,12 +1,12 @@
 export const router = route => {
   const routes = {
     '/': 'app-home',
-    '/films': 'body-films',
-    '/people': 'body-people',
-    '/planets': 'app-planets',
-    '/species': 'app-species',
-    '/starships': 'app-starships',
-    '/vehicles': 'app-vehicles',
+    '/films': 'app-home',
+    '/people': 'app-home',
+    '/planets': 'app-home',
+    '/species': 'app-home',
+    '/starships': 'app-home',
+    '/vehicles': 'app-home',
   }
   const component = routes[route] ? routes[route] : 'app-home'
   return component

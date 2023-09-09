@@ -6,6 +6,7 @@ export const handleRouteChange = () => {
   switch (componentName) {
     case 'app-home':
       const container_main = document.getElementById('app-container')
+      container_main.innerHTML = ''
       handleCreateComponent(componentName, container_main)
       break
     case 'body-films':

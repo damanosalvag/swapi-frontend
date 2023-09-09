@@ -10,10 +10,11 @@ export class AppHome extends HTMLElement {
     this.render()
   }
   render () {
-    const header = new HomeHeader()
-    this.appendChild(header)
-    const body = new HomeBody()
-    this.appendChild(body)
+    this.header = new HomeHeader()
+    this.appendChild(this.header)
+    this.body = new HomeBody()
+    this.appendChild(this.body)
+
   }
 }
 
