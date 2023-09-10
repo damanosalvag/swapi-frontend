@@ -1,7 +1,6 @@
 import "./components/AppElement.js";
 import "./components/home/AppHome.js"
 import "./components/home/body/HomeBody.js"
-import "./components/home/body/BodyPeople.js"
 import { handleRouteChange } from "./utils/router.js";
 
 // window.addEventListener('DOMContentLoaded', () => {

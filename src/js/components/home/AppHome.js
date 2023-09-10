@@ -1,6 +1,5 @@
 import { HomeHeader } from './HomeHeader.js'
 import { HomeBody } from './body/HomeBody.js'
-import { BodyFilms } from './body/BodyFilms.js'
 
 export class AppHome extends HTMLElement {
   constructor() {
