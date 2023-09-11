@@ -25,24 +25,32 @@ export class HomePagination extends HTMLElement {
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
-    if(newValue) {
+    if (newValue) {
       this.pagination = JSON.parse(newValue)
       this.data = this.pagination
       const { previous, next, totalPage, currentPage } = this.pagination
+      console.log(previous, next, totalPage, currentPage)
       this.pagNumber = document.querySelector('.body-pagination__num')
       this.pagNumber.innerHTML = `${currentPage}/${totalPage}`
-    } 
+    }
   }
-  // handleClick (event) {
-  //   if (event.target && event.target.matches('.btn-prev')) {
-  //     this.prev_endPoint = this.data.previous
-  //     // call api
-  //     fetchDataPg(this.prev_endPoint).then(data => )
-  //     // const bodyList = document.getElementById('home-body__list')
-  //     // bodyList.remove()
+  handleClick(event) {
+    if (event.target && event.target.matches('.btn-prev')) {
+      this.prev_endPointApi = this.data.previous
+      this.prev_endPoint = this.prev_endPointApi.split('api').slice(2)
+      window.history.pushState({}, '', this.prev_endPoint)
+      window.dispatchEvent(new Event('popstate'))
 
-  //   }
-  //  }
+    } else if (event.target && event.target.matches('.btn-next')) {
+      this.next_endPointApi = this.data.next
+      this.next_endPoint = this.next_endPointApi.split('api').slice(2)
+      console.log(this.next_endPoint)
+      window.history.pushState({}, '', this.next_endPoint)
+      window.dispatchEvent(new Event('popstate'))
+    } else {
+      return
+    }
+  }
 }
 
 customElements.define('home-pagination', HomePagination)

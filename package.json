@@ -6,7 +6,9 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "serve --single"
+    "start": "serve --single",
+    "dev": "serve --config serve-config.json",
+    "help": "serve --help"
   },
   "keywords": [],
   "author": "",
