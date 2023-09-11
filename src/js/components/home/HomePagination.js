@@ -4,7 +4,7 @@ export class HomePagination extends HTMLElement {
   constructor() {
     super()
     this.data = null
-    this.setAttribute('pagination', 'data')
+    this.setAttribute('pagination', '')
   }
   static get observedAttributes() {
     return ['pagination']
@@ -25,11 +25,13 @@ export class HomePagination extends HTMLElement {
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
-    this.pagination = JSON.parse(newValue)
-    this.data = this.pagination
-    const { previous, next, totalPage, currentPage } = this.pagination
-    this.pagNumber = document.querySelector('.body-pagination__num')
-    this.pagNumber.innerHTML = `${currentPage}/${totalPage}`
+    if(newValue) {
+      this.pagination = JSON.parse(newValue)
+      this.data = this.pagination
+      const { previous, next, totalPage, currentPage } = this.pagination
+      this.pagNumber = document.querySelector('.body-pagination__num')
+      this.pagNumber.innerHTML = `${currentPage}/${totalPage}`
+    } 
   }
   // handleClick (event) {
   //   if (event.target && event.target.matches('.btn-prev')) {

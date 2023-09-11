@@ -14,6 +14,8 @@ export class HomeBody extends HTMLElement {
   }
   render() {
     this.currentRoute = window.location.pathname
+    this.queryString = window.location.search
+    // this.params = new URLSearchParams(queryString)
     const [mainRoute] = this.currentRoute.split('/').slice(1)
 
     this.containerTest = document.createElement('h2')
@@ -21,7 +23,7 @@ export class HomeBody extends HTMLElement {
     this.containerTest.innerHTML = `The sections is ${mainRoute}`
 
     //call to api
-    fetchDataMain(mainRoute)
+    fetchDataMain(mainRoute, this.queryString)
       .then(data =>
         mainRoute !== '' ? this.handleData(data, mainRoute) : data
       )
@@ -44,7 +46,7 @@ export class HomeBody extends HTMLElement {
         return { name: element.name, url: element.url }
       })
     }
-// pagination
+    // pagination
     this.currentPage = next ? parseInt(next[next.length - 1]) - 1 : '1'
     this.pagNum = `${Math.ceil(count / 10)}`
     this.pagination = JSON.stringify({
