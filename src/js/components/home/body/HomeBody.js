@@ -1,6 +1,5 @@
 // import { fetchData } from '../../../services/api.js'
 import { fetchDataMain } from '../../../services/api.js'
-import { BodyPagination } from './BodyPagination.js'
 
 export class HomeBody extends HTMLElement {
   constructor() {
@@ -9,8 +8,6 @@ export class HomeBody extends HTMLElement {
     this.container = document.createElement('section')
     this.appendChild(this.container)
     this.container.id = 'home-body'
-    this.pagination = new BodyPagination()
-    this.appendChild(this.pagination)
   }
   connectedCallback() {
     this.render()
@@ -25,8 +22,12 @@ export class HomeBody extends HTMLElement {
 
     //call to api
     fetchDataMain(mainRoute)
-      .then(data => this.handleData(data, mainRoute))
-      .then(data => this.handleRender(data))
+      .then(data =>
+        mainRoute !== '' ? this.handleData(data, mainRoute) : data
+      )
+      .then(data =>
+        mainRoute !== '' ? this.handleRender(data) : console.log(data)
+      )
       .catch(error => {
         console.log(error)
       })
@@ -43,16 +44,23 @@ export class HomeBody extends HTMLElement {
         return { name: element.name, url: element.url }
       })
     }
-    this.pagNum = this.pagination.querySelector('.body-pagination__num')
+// pagination
     this.currentPage = next ? parseInt(next[next.length - 1]) - 1 : '1'
-    this.pagNum.innerHTML = `${this.currentPage}/${Math.ceil(count / 10)}`
-    this.pagination.setAttribute('next', next)
-    this.pagination.setAttribute('previous', previous)
+    this.pagNum = `${Math.ceil(count / 10)}`
+    this.pagination = JSON.stringify({
+      next: next,
+      previous: previous,
+      totalPage: this.pagNum,
+      currentPage: this.currentPage,
+    })
+    this.homePagination = document.querySelector('home-pagination')
+    this.homePagination.setAttribute('pagination', this.pagination)
 
     return elements
   }
   handleRender(list) {
     const listElement = document.createElement('ul')
+    listElement.id = 'home-body__list'
     list.forEach(element => {
       const item = document.createElement('li')
       item.innerHTML = `<a href="${element.url}">${element.name}</a>`

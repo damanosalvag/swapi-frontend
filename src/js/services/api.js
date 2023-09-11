@@ -1,12 +1,7 @@
-// export async function fetchData(endPonit) {
-//   try {
-//     const response = await fetch(`https://swapi.dev/api/${endPonit}`)
-//     const data = await response.json()
-//     return data
-//   } catch (error) {
-//     console.log(error)
-//   }
-// }
+export function fetchDataPg(endPonit) {
+    const response = fetch(endPonit).then(response => response.json())
+    return response
+}
 
 export function fetchDataMain(endPonit) {
   const response = fetch(`https://swapi.dev/api/`)
