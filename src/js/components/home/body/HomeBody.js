@@ -1,5 +1,6 @@
 // import { fetchData } from '../../../services/api.js'
 import { fetchDataMain } from '../../../services/api.js'
+import { handleListEvent } from '../../../utils/handleData.js'
 
 export class HomeBody extends HTMLElement {
   constructor() {
@@ -47,7 +48,7 @@ export class HomeBody extends HTMLElement {
       })
     }
     // pagination
-    this.currentPage = next ? parseInt(next[next.length - 1]) - 1 : '1'
+    this.currentPage = previous ? parseInt(previous[previous.length -1]) +1 : '1'
     this.pagNum = `${Math.ceil(count / 10)}`
     this.pagination = JSON.stringify({
       next: next,
@@ -69,6 +70,7 @@ export class HomeBody extends HTMLElement {
       listElement.appendChild(item)
     })
     this.container.appendChild(listElement)
+    handleListEvent()
   }
 }
 

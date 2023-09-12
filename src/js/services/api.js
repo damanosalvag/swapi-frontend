@@ -1,4 +1,4 @@
-export function fetchDataPg(endPonit) {
+export function fetchDataSubRoute(endPonit) {
   const response = fetch(endPonit).then(response => response.json())
   return response
 }
