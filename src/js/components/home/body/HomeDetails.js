@@ -5,17 +5,29 @@ export class HomeDetails extends HTMLElement {
     super()
     this.detailsListTitle = document.createElement('h2')
     this.detailsListTitle.textContent = 'Details'
+    this.appendChild(this.detailsListTitle)
     this.ulElements = document.createElement('ul')
     this.ulElements.id = 'list_home-details'
     this.appendChild(this.ulElements)
   }
-  connectedCallback() {
-    this.render()
+  static get observedAttributes() {
+    return ['details-raw']
   }
-  render() {
-    this.detailsContainer = document.querySelector('home-body')
-    this.dataRaw = this.detailsContainer.getAttribute('data')
-    this.data = JSON.parse(this.dataRaw)
+  connectedCallback() {
+    if (!this.hasAttribute('isDataDetailsRendered')) {
+      this.backPage = document.createElement('button')
+      this.backPage.classList.add('btn-backPage')
+      this.backPage.textContent = 'Back'
+      this.appendChild(this.backPage)
+    }
+  }
+  attributeChangedCallback(name, oldValue, newValue) {
+    this.render(newValue)
+    this.setAttribute('isDataDetailsRendered', '')
+  }
+
+  render(dataRaw) {
+    this.data = JSON.parse(dataRaw)
 
     Object.keys(this.data).forEach(key => {
       let value = this.data[key]
