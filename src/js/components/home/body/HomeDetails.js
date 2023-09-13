@@ -1,8 +1,10 @@
 import { fetchDataSubRoute } from '../../../services/api.js'
+import { fetchDataGroup } from '../../../services/api.js'
 
 export class HomeDetails extends HTMLElement {
   constructor() {
     super()
+    this.keyGroup = []
     this.detailsListTitle = document.createElement('h2')
     this.detailsListTitle.textContent = 'Details'
     this.appendChild(this.detailsListTitle)
@@ -35,16 +37,35 @@ export class HomeDetails extends HTMLElement {
         typeof value === 'string' &&
         value.startsWith('https://swapi.dev/api/')
       ) {
-        value = fetchDataSubRoute(value).then(obj => {
+        value = fetchDataSubRoute(value).then(item => {
           this.liElement = document.createElement('li')
-          this.liElement.textContent = `${key}: ${obj.name}`
+          this.liElement.textContent = `${key}: ${item.name}`
           this.ulElements.appendChild(this.liElement)
         })
-      } else if (Array.isArray(value)) {
-        value = 'test'
+      } else if (Array.isArray(value) && value.length !== 0) {
         this.liElement = document.createElement('li')
-        this.liElement.textContent = `${key}: ${value}`
+        this.liElement.textContent = `${key}:`
+        this.liElement.classList.add(`${key}`)
         this.ulElements.appendChild(this.liElement)
+        this.keyGroup.push(key)
+
+        this.objGroup = fetchDataGroup(value).then(obj => {
+          this.count = 1
+          this.length = obj.length
+          obj.map(item => {
+            this.nameGroup = this.keyGroup[0]
+            this.liElementRef = document.querySelector(`.${this.nameGroup}`)
+            this.name = item.title ? item.title : item.name
+            this.aElement = document.createElement('a')
+            this.aElement.textContent = `${this.name}`
+            this.aElement.setAttribute('href', item.url)
+            this.liElementRef.appendChild(this.aElement)
+            if (this.length === this.count) {
+              this.keyGroup.shift()
+            }
+            this.count++
+          })
+        })
       } else {
         this.liElement = document.createElement('li')
         this.liElement.textContent = `${key}: ${value}`

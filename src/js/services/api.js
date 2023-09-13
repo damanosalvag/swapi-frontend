@@ -3,6 +3,15 @@ export function fetchDataSubRoute(endPonit) {
   return response
 }
 
+export async function fetchDataGroup(array) {
+  const fetchPromises = array.map(endPoint => fetch(endPoint))
+  const allPromises = await Promise.all(fetchPromises)
+  const responses = await Promise.all(
+    allPromises.map(response => response.json())
+  )
+  return responses
+}
+
 export function fetchDataMain(endPonit, paramPage) {
   const response = fetch(`https://swapi.dev/api/`)
     .then(response => response.json())
