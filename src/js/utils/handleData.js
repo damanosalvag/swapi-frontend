@@ -20,3 +20,18 @@ export function handleListEvent() {
     })
   })
 }
+export function handleListEventDetails(link, num) {
+  link.addEventListener('click', e => {
+    e.preventDefault()
+    const route = link.getAttribute('href')
+    fetchDataSubRoute(route).then(data => {
+      const homeDetails =
+        document.querySelector(`home-details_${num}`) || new HomeDetails()
+      const cleanList = homeDetails.querySelector('ul')
+      cleanList.innerHTML = ''
+      const detailsContainer = document.querySelector('home-body')
+      detailsContainer.appendChild(homeDetails)
+      homeDetails.setAttribute('details-raw', JSON.stringify(data))
+    })
+  })
+}

@@ -1,22 +1,24 @@
-import { fetchDataSubRoute } from '../../../services/api.js'
-import { fetchDataGroup } from '../../../services/api.js'
+import { fetchDataSubRoute, fetchDataGroup } from '../../../services/api.js'
+import { handleListEventDetails } from '../../../utils/handleData.js'
 
 export class HomeDetails extends HTMLElement {
   constructor() {
     super()
     this.keyGroup = []
+    this.version = this.countHomeDetails()
+    this.id = `home-details_${this.version}`
     this.detailsListTitle = document.createElement('h2')
-    this.detailsListTitle.textContent = 'Details'
+    this.detailsListTitle.textContent = `Details_${this.version}`
     this.appendChild(this.detailsListTitle)
     this.ulElements = document.createElement('ul')
-    this.ulElements.id = 'list_home-details'
+    this.ulElements.id = `list_home-details_${this.version}`
     this.appendChild(this.ulElements)
   }
   static get observedAttributes() {
     return ['details-raw']
   }
   connectedCallback() {
-    if (!this.hasAttribute('isDataDetailsRendered')) {
+    if (!this.hasAttribute(`isDataDetailsRendered_${this.version}`)) {
       this.backPage = document.createElement('button')
       this.backPage.classList.add('btn-backPage')
       this.backPage.textContent = 'Back'
@@ -25,7 +27,7 @@ export class HomeDetails extends HTMLElement {
   }
   attributeChangedCallback(name, oldValue, newValue) {
     this.render(newValue)
-    this.setAttribute('isDataDetailsRendered', '')
+    this.setAttribute(`isDataDetailsRendered_${this.version}`, '')
   }
 
   render(dataRaw) {
@@ -54,7 +56,9 @@ export class HomeDetails extends HTMLElement {
           this.length = obj.length
           obj.map(item => {
             this.nameGroup = this.keyGroup[0]
-            this.liElementRef = document.querySelector(`.${this.nameGroup}`)
+            this.liElementRef = this.ulElements.querySelector(
+              `.${this.nameGroup}`
+            )
             this.name = item.title ? item.title : item.name
             this.aElement = document.createElement('a')
             this.aElement.textContent = `${this.name}`
@@ -64,6 +68,7 @@ export class HomeDetails extends HTMLElement {
               this.keyGroup.shift()
             }
             this.count++
+            handleListEventDetails(this.aElement, this.version)
           })
         })
       } else {
@@ -72,6 +77,15 @@ export class HomeDetails extends HTMLElement {
         this.ulElements.appendChild(this.liElement)
       }
     })
+  }
+  countHomeDetails() {
+    this.mainContainerHome = document.querySelector('home-body')
+    this.matches = this.mainContainerHome.querySelectorAll('home-details')
+    if (this.matches.length !== 0) {
+      this.count = this.matches.length + 1
+      return this.count
+    }
+    return 1
   }
 }
 customElements.define('home-details', HomeDetails)
