@@ -1,0 +1,98 @@
+*{
+    margin: 0;
+}
+
+.header__logo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    
+}
+img {
+    height: 250px;
+}
+.title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 30px;
+}
+h2{
+    padding: 20px;
+    text-transform: uppercase;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+}
+
+/* nav menu */
+.header__nav{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    border-bottom: solid 1px gray;
+    padding-bottom: 20px;
+}
+.header__nav a {
+    border: solid 1px gray;
+    border-radius: 4px;
+    background-color: gray;
+    padding: 5px 15px;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+}
+
+/* details */
+home-body {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+    justify-items: flex-start;
+    padding-right: 15px;
+}
+section#home-body{
+    background-color: gray;
+}
+a {
+    text-decoration: none;
+}
+ul{
+    padding-bottom: 15px;
+    font-family: 'Nunito', sans-serif;
+    text-transform: capitalize;
+}
+ul#home-body__list{
+    padding-bottom: 55px;
+}
+
+/* pagination */
+.body-pagination{
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    background-color: black;
+
+    height: 50px;
+}
+.body-pagination__num{
+    color: white;
+}
+/* close button */
+.btn-close{
+    margin-bottom: 55px;
+}

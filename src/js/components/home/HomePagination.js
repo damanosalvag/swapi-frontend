@@ -18,7 +18,7 @@ export class HomePagination extends HTMLElement {
     this.innerHTML = `
 <section class="body-pagination">
 <Button class="btn-prev" aria-label="Back" type="button">Prev</Button>
-<p class="body-pagination__num">1/1</p>
+<p class="body-pagination__num"> 1 / 1 </p>
 <Button class="btn-next" aria-label="Forward" type="button">Next</Button>
 </section>
 `
@@ -31,7 +31,7 @@ export class HomePagination extends HTMLElement {
       const { previous, next, totalPage, currentPage } = this.pagination
       console.log(previous, next, totalPage, currentPage)
       this.pagNumber = document.querySelector('.body-pagination__num')
-      this.pagNumber.innerHTML = `${currentPage}/${totalPage}`
+      this.pagNumber.innerHTML = ` ${currentPage} / ${totalPage} `
     }
   }
   handleClick(event) {
@@ -40,7 +40,6 @@ export class HomePagination extends HTMLElement {
       this.prev_endPoint = this.prev_endPointApi.split('api').slice(2)
       window.history.pushState({}, '', this.prev_endPoint)
       window.dispatchEvent(new Event('popstate'))
-
     } else if (event.target && event.target.matches('.btn-next')) {
       this.next_endPointApi = this.data.next
       this.next_endPoint = this.next_endPointApi.split('api').slice(2)

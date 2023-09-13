@@ -1,5 +1,6 @@
 import { fetchDataSubRoute, fetchDataGroup } from '../../../services/api.js'
 import { handleListEventDetails } from '../../../utils/handleData.js'
+import { removeKeys } from '../../../utils/handleRemove.js'
 
 export class HomeDetails extends HTMLElement {
   constructor() {
@@ -19,10 +20,17 @@ export class HomeDetails extends HTMLElement {
   }
   connectedCallback() {
     if (!this.hasAttribute(`isDataDetailsRendered_${this.version}`)) {
-      this.backPage = document.createElement('button')
-      this.backPage.classList.add('btn-backPage')
-      this.backPage.textContent = 'Back'
-      this.appendChild(this.backPage)
+      this.closeBtn = document.createElement('button')
+      this.closeBtn.classList.add('btn-close')
+      this.closeBtn.textContent = 'close'
+      this.appendChild(this.closeBtn)
+      this.closeBtn.addEventListener('click', () => {
+        // this.homeDetails = document.getElementById(`home-details_${this.version}`)
+        // this.homeDetails.remove()
+        this.remove()
+      
+      })
+    
     }
   }
   attributeChangedCallback(name, oldValue, newValue) {
@@ -31,8 +39,8 @@ export class HomeDetails extends HTMLElement {
   }
 
   render(dataRaw) {
-    this.data = JSON.parse(dataRaw)
-
+    this.dataJson = JSON.parse(dataRaw)
+    this.data = removeKeys(this.dataJson)
     Object.keys(this.data).forEach(key => {
       let value = this.data[key]
       if (
@@ -61,7 +69,7 @@ export class HomeDetails extends HTMLElement {
             )
             this.name = item.title ? item.title : item.name
             this.aElement = document.createElement('a')
-            this.aElement.textContent = `${this.name}`
+            this.aElement.textContent = `  | ${this.name}`
             this.aElement.setAttribute('href', item.url)
             this.liElementRef.appendChild(this.aElement)
             if (this.length === this.count) {

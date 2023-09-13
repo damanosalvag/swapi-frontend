@@ -19,9 +19,10 @@ export class HomeBody extends HTMLElement {
     // this.params = new URLSearchParams(queryString)
     const [mainRoute] = this.currentRoute.split('/').slice(1)
 
-    this.containerTest = document.createElement('h2')
-    this.container.appendChild(this.containerTest)
-    this.containerTest.innerHTML = `The sections is ${mainRoute}`
+    this.containerSection = document.createElement('h2')
+    this.containerSection.id = 'home-body__section'
+    this.container.appendChild(this.containerSection)
+    this.containerSection.innerHTML = `Section ${mainRoute}`
 
     //call to api
     fetchDataMain(mainRoute, this.queryString)

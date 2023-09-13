@@ -14,7 +14,12 @@ export function handleListEvent() {
         const cleanList = homeDetails.querySelector('ul')
         cleanList.innerHTML = ''
         const detailsContainer = document.querySelector('home-body')
-        detailsContainer.appendChild(homeDetails)
+        const refer = document.getElementById('home-body')
+        if (refer) {
+          detailsContainer.insertBefore(homeDetails, refer.nextSibling)
+        } else {
+          detailsContainer.appendChild(homeDetails)
+        }
         homeDetails.setAttribute('details-raw', JSON.stringify(data))
       })
     })
