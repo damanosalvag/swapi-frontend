@@ -2,6 +2,7 @@
   "name": "swapi",
   "version": "1.0.0",
   "description": "",
+  "homepage": "https://damanosalvag.github.io/swapi-frontend",
   "main": "index.js",
   "type": "module",
   "scripts": {
@@ -9,6 +10,10 @@
     "start": "serve --single",
     "dev": "serve --config serve-config.json",
     "help": "serve --help"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/damanosalvag/swapi-frontend.git"
   },
   "keywords": [],
   "author": "",
