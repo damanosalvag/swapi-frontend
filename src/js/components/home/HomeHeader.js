@@ -9,7 +9,7 @@ export class HomeHeader extends HTMLElement {
     this.innerHTML = `
 <header class="header">
 <div class="header__logo">
-<img src="gs://filmoteca-c42e2.appspot.com/images/logo.jpg" alt="logo">
+<img src="https://firebasestorage.googleapis.com/v0/b/filmoteca-c42e2.appspot.com/o/images%2Flogo.jpg?alt=media&token=8bd7c390-3a6c-46ee-8474-f64fcd3f3609" alt="logo">
 </div>
 <div class="header__title-container">
 <h1 class="title">Star Wars API frontend</h1>
