@@ -43,7 +43,7 @@ export class HomePagination extends HTMLElement {
     } else if (event.target && event.target.matches('.btn-next')) {
       this.next_endPointApi = this.data.next
       this.next_endPoint = this.next_endPointApi.split('api').slice(2)
-      console.log(this.next_endPoint)
+      // console.log(this.next_endPoint)
       window.history.pushState({}, '', this.next_endPoint)
       window.dispatchEvent(new Event('popstate'))
     } else {

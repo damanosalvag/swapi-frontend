@@ -25,12 +25,8 @@ export class HomeDetails extends HTMLElement {
       this.closeBtn.textContent = 'close'
       this.appendChild(this.closeBtn)
       this.closeBtn.addEventListener('click', () => {
-        // this.homeDetails = document.getElementById(`home-details_${this.version}`)
-        // this.homeDetails.remove()
         this.remove()
-      
       })
-    
     }
   }
   attributeChangedCallback(name, oldValue, newValue) {

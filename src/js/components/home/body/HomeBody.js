@@ -18,7 +18,7 @@ export class HomeBody extends HTMLElement {
     this.queryString = window.location.search
     // this.params = new URLSearchParams(queryString)
     const [mainRoute] = this.currentRoute.split('/').slice(1)
-
+    console.log(this.currentRoute, this.queryString)
     this.containerSection = document.createElement('h2')
     this.containerSection.id = 'home-body__section'
     this.container.appendChild(this.containerSection)

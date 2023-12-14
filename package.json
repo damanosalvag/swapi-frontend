@@ -11,17 +11,13 @@
     "dev": "serve --config serve-config.json",
     "help": "serve --help"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/damanosalvag/swapi-frontend.git"
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "devDependencies": {
-    "serve": "^14.2.1"
-  },
   "dependencies": {
     "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "serve": "^14.2.1"
   }
 }

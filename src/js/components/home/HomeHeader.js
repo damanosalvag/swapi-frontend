@@ -1,3 +1,5 @@
+// import logoPic from '../../../assets/public/logo.jpg'
+
 export class HomeHeader extends HTMLElement {
   connectedCallback() {
     this.render()
@@ -7,7 +9,7 @@ export class HomeHeader extends HTMLElement {
     this.innerHTML = `
 <header class="header">
 <div class="header__logo">
-<img src="./src/public/logo.jpg" alt="logo">
+<img src="gs://filmoteca-c42e2.appspot.com/images/logo.jpg" alt="logo">
 </div>
 <div class="header__title-container">
 <h1 class="title">Star Wars API frontend</h1>
